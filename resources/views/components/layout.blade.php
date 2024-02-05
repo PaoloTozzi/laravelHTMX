@@ -16,11 +16,31 @@
             {{ session('message') }}
         </div>
     @endsession
-    @unless ($errors->any() || !request()->headers->has('HX-Request'))
-        <x-navbar />
-    @endunless
+    @if(!request()->headers->has('HX-Request'))
+        <div class="container-fluid bg-warning">
+            <div class="row bg-warning text-center justify-content-center">
+                <div class="col-3">
+                    <a hx-get="{{ route('home') }}" hx-target="#test" hx-swap="outerHTML" hx-push-url="{{ route('home') }}">
+                        home
+                    </a>
+                </div>
+                <div class="col-3">
 
-    <div class="min-vh100">
+                    <a hx-get="{{ route('contact.create') }}" hx-target="#test" hx-swap="outerHTML" hx-push-url="{{ route('contact.create') }}">
+                        Aggiungi un contatto
+                    </a>
+                </div>
+                <div class="col-3">
+
+                    <a hx-get="{{ route('contact.index') }}" hx-target="#test" hx-swap="outerHTML" hx-push-url="{{ route('contact.index') }}">
+                        Tutti i contatti
+                    </a>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <div class="min-vh100" id="test">
         {{ $slot }}
     </div>
 </body>

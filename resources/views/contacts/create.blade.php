@@ -37,11 +37,9 @@
                         <button class="btn btn-success" type="submit">Add new contact</button>
                     </div>
                 </form>
-                <a href="{{ route('contact.index') }}">Back to contacts</a>
+                <a hx-get="{{ route('contact.index') }}" hx-swap="outerHTML" hx-push-url="{{ route('contact.index') }}" hx-target="#test">Back to contacts</a>
 
             </div>
         </div>
     </div>
-
-    <div id="test"></div>
 </x-layout>

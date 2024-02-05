@@ -7,9 +7,8 @@ use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
-    function home() : View
+    function home()
     {
-        return view('home');
-        
+        return response()->view('home');  
     }
 }
