@@ -64,7 +64,7 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        //
+        return view('contacts.edit', compact('contact'));
     }
 
     /**
@@ -72,7 +72,22 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        //
+        $request->validate([
+            'name'=>'required|min:3',
+            'email'=>'required|email',
+            'phone'=>'required|numeric:10',
+        ]);
+        
+        $contact->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+        ]);
+
+        $contact->save();
+
+
+        return redirect()->route('contact.show',$contact);
     }
 
     /**
@@ -80,6 +95,8 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        $contact->delete();
+
+        return redirect()->route('contact.index');
     }
 }
